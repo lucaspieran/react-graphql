@@ -69,27 +69,27 @@ export default function SearchAppBar() {
 
       <Container maxWidth="sm">
         {loading && <CircularProgress sx={{ marginTop: 20 }} />}
-        {error && (
+        {error ? (
           <Typography color={"red"} mt={15} fontSize={20}>
             Hubo un error
           </Typography>
+        ) : (
+          <div>
+            <Typography variant="h4" gutterBottom>
+              Human Characters from Rick and Morty
+            </Typography>
+            <List>
+              {data?.humanCharacters?.map((character) => (
+                <ListItem key={character.name}>
+                  <ListItemText
+                    primary={character.name}
+                    secondary={`Species: ${character.species} | Status: ${character.status}`}
+                  />
+                </ListItem>
+              ))}
+            </List>
+          </div>
         )}
-
-        <div>
-          <Typography variant="h4" gutterBottom>
-            Human Characters from Rick and Morty
-          </Typography>
-          <List>
-            {data?.humanCharacters?.map((character) => (
-              <ListItem key={character.name}>
-                <ListItemText
-                  primary={character.name}
-                  secondary={`Species: ${character.species} | Status: ${character.status}`}
-                />
-              </ListItem>
-            ))}
-          </List>
-        </div>
       </Container>
     </>
   );
